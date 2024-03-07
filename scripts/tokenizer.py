@@ -86,17 +86,14 @@ class TokenizerCLI(SentencePieceTrainer):
         
         
         if args.train:
-            train_tokeniser(args.text_corpus, args.output)
+            self.train_tokenizer(args.text_corpus, args.output)
         elif args.merge:
-            merge_tokeniser(args.base_tokeniser, args.merged_output)
+            self.merge_tokenizer(args.base_tokeniser, args.merged_output)
         elif args.test:
-            test_tokeniser(args.text_corpus, args.output)
+            self.test_tokeniser(args.text_corpus, args.output)
         else:
             logger.error("Please provide either --train or --merge or --test option.")
-        # if generate corpus is true
-        # verify is generate_corpus is boolean (default: False)
-        # assert args.generate_corpus is bool, "--generate-corpus should be True or False"
-        
+
 if __name__ == "__main__":
     tokenizer = TokenizerCLI()
     tokenizer.run()
