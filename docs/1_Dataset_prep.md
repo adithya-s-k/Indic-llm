@@ -20,29 +20,32 @@ kannada subset
 
    ```shell
 
-   python3 ./scripts/generate_corpus.py \
+   python3 ./scripts/download_dataset.py \
        --hf-dataset "wikimedia/wikipedia" \
        --hf-subset "20231101.kn" \
+       --generate-corpus "True" \
        --text-col "text" \
        --output-file-name "kannada_sentence_corpus_wikipedia-31.4k.txt"
    ```
 
 2. [mc4 (Kannada rows -1.06M)](https://huggingface.co/datasets/mc4)
    ```shell
-   python3 ./scripts/generate_corpus.py \
+   python3 ./scripts/download_dataset.py \
        --hf-dataset "mc4" \
        --hf-subset "kn" \
+       --generate-corpus "True" \
        --text-col "text" \
        --output-file-name "kannada_sentence_corpus_mc4-1.06M.txt"
    ```
 
 3. [uonlp/CulturaX-1.3M](https://huggingface.co/datasets/uonlp/CulturaX/tree/main/kn)
    ```shell
-   python3 ./scripts/generate_corpus.py \
+   python3 ./scripts/download_dataset.py \
        --hf-dataset "uonlp/CulturaX" \
        --hf-subset "kn" \
+       --generate-corpus "True" \
        --text-col "text" \
-       --output-file-name "kannada_sentence_corpus_CulturaX_1.3M.txt"
+       --output-file-name "kannada_sentence_corpus_CulturaX.txt"
    ```
 
 4. [oscar-corpus/OSCAR-2201-151k](https://huggingface.co/datasets/oscar-corpus/OSCAR-2201)
