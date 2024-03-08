@@ -1,14 +1,6 @@
 # Indic-LLM
 
-Indic-LLM is a framework that provides the foundation to adapt Language Models (LLMs) for Indic languages using LLama 2 as the base model. LLama 2, developed by Meta, serves as the backbone for this project, offering a powerful starting point for building linguistic models tailored to Indic languages.
-
-## Table of Contents
-- [Usage Note](#usage-note)
-- [Contributions](#contributions)
-- [License](#license)
-- [Citation](#citation)
-- [Acknowledgment](#acknowledgement)
-
+Indic-LLM is a framework that provides the foundation to adapt Language Models (LLMs) for Indic languages supporting LLMs such as LLama 2,Mistral,Gemma 
 
 ## Installation
 
@@ -21,6 +13,30 @@ conda activate indic-venv
 
 pip3 install -r requirements.txt
 ```
+
+## Model Support 
+| Model  | Tokeniser | Pretraining(Lora) | SFT | DPO | Evaluation |
+|--------|-----------|---------------------|-----|-----|------------|
+| LLama2 | ✅        | ✅                 | ✅  | ✅  | ✅         |
+| Mistral| ✅        | ✅                 | ✅  | ✅  | ✅         |
+| Gemma  | -        | ✅                 | ✅  | ✅  | ✅         |
+| Qwen   | -         | -                 | -  | -  | -         |
+
+
+## Quick Start
+
+```bash
+
+```
+
+## Dataset Prep
+
+
+## Finetuning
+
+
+## Evaluation
+
 
 ## Usage Note
 
