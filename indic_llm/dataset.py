@@ -28,6 +28,9 @@ def download(
     
     return dataset
 
+def download_multiple() -> None:
+    pass
+
 def convert_to_corpus(
     dataset_name,
     dataset_subset,
@@ -54,3 +57,8 @@ def convert_to_corpus(
         logger.error(f"Error creating the text corpus -> {e}")
 
     return corpus_path
+
+
+def truncate_text_corpus() -> None:
+    pass
+
