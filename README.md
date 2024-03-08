@@ -10,6 +10,17 @@ Indic-LLM is a framework that provides the foundation to adapt Language Models (
 - [Acknowledgment](#acknowledgement)
 
 
+## Installation
+
+```bash
+git clone https://github.com/adithya-s-k/Indic-llm.git
+cd Indic-llm
+
+conda create -n indic-venv python=3.10
+conda activate indic-venv
+
+pip3 install -r requirements.txt
+```
 
 ## Usage Note
 
