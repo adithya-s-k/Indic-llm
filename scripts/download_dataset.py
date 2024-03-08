@@ -1,12 +1,20 @@
-import argparse
-import logging
+import sys
 import os
+import json
+import shutil
+import logging
+import argparse
+from tqdm import tqdm
 
 import pandas as pd
 from datasets import load_dataset
-from tqdm import tqdm
+from dataclasses import asdict
+from pathlib import Path
 
-from indic_llm.dataset import download
+wd = Path(__file__).parent.parent.resolve()
+sys.path.append(str(wd))
+
+from indic_llm import download
 
 logging.basicConfig(
     level=logging.INFO,
