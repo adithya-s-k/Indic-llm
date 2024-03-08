@@ -72,7 +72,7 @@ class DownloadDataset():
             help="name of the output corpus text file formate: {input_file_name}.txt"
         )
         parser.add_argument(
-            "--output-directory",
+            "--output-dir",
             type=str,
             required=False,
             default="./corpus",
@@ -102,7 +102,7 @@ class DownloadDataset():
                 args.hf_dataset,
                 args.hf_subset,
                 args.dataset_split,
-                args.text_col,
+                args.text_column,
                 args.output_file_name,
                 args.output_dir
             )
