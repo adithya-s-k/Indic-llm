@@ -13,25 +13,31 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def download(
+def download_dataset(
     dataset_name,
     dataset_subset,
     dataset_split="train",
-    ) -> Dataset:
+    ) -> None:
     
-    dataset = load_dataset(
-        dataset_name,
-        dataset_subset,
-        split=dataset_split,
-        keep_in_memory=True
-    )
+    logger.info("Starting to download/load dataset")
     
-    return dataset
+    try:
+        load_dataset(
+            dataset_name,
+            dataset_subset,
+            split=dataset_split,
+            keep_in_memory=True
+        )
+        
+        logger.info("Downloading dataset completed successfully")
+    except Exception as e:
+        logger.error("An error occurred while downloading dataset")
+        logger.error(f"Exception: {e}")
 
 def download_multiple() -> None:
     pass
 
-def convert_to_corpus(
+def download_convert_to_txt(
     dataset_name,
     dataset_subset,
     dataset_split,

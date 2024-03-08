@@ -15,8 +15,7 @@ from pathlib import Path
 wd = Path(__file__).parent.parent.resolve()
 sys.path.append(str(wd))
 
-from indic_llm.dataset import download
-from indic_llm.dataset import convert_to_corpus
+from indic_llm.dataset import download_dataset, download_convert_to_txt
 from indic_llm import print_indic_llm_text_art
 
 logging.basicConfig(
@@ -72,6 +71,13 @@ class DownloadDataset():
             default="text",
             help="name of the output corpus text file formate: {input_file_name}.txt"
         )
+        parser.add_argument(
+            "--output-directory",
+            type=str,
+            required=False,
+            default="./corpus",
+            help="name of the output directory where you want to save text corpus"
+        )
 
         args = parser.parse_args()
         
@@ -86,24 +92,29 @@ class DownloadDataset():
         logger.setLevel(logging.INFO)
         # if generate corpus is true
         # verify is generate_corpus is boolean (default: False)
-        assert args.generate_corpus is bool, "--generate-corpus should be True or False"
-        if args.generate_corpus:
+        # assert args.generate_corpus is bool, "--generate-corpus should be True or False"
+        if args.generate_corpus == True:
             assert args.text_column != "", "Text column must not be empty"
             assert args.output_file_name != "", "Output file name must not be empty"
-            assert not args.output_file_name.endswith(".txt"), "Output file name should not end with '.txt'"
-            downloaded_dataset = download(
-                args.hf_dataset,
-                args.hf_subset,
-                args.dataset_split
+            assert args.output_file_name.endswith(".txt"), "Output file name should end with '.txt'"
+            
+            download_convert_to_txt(
+                arg.hf_dataset,
+                arg.hf_subset,
+                args.dataset_split,
+                args.text_col,
+                arg.output_file_name,
+                arg.output_dir
             )
-            convert_to_corpus(downloaded_dataset)
         # if generate corpus is false
-        else:
-            downloaded_dataset = download(
+        elif args.generate_corpus == False:
+            download_dataset(
                 args.hf_dataset,
                 args.hf_subset,
                 args.dataset_split
             )
+        else:
+            logger.error("Invalid input for --generate_corpus. Use 'True' or 'False'.")
         
 if __name__ == "__main__":
     download_dataset = DownloadDataset()
