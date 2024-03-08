@@ -3,7 +3,7 @@ import os
 import json
 
 import pandas as pd
-from datasets import load_dataset
+from datasets import Dataset, load_dataset
 from tqdm import tqdm
 
 logging.basicConfig(
@@ -17,7 +17,7 @@ def download(
     dataset_name,
     dataset_subset,
     dataset_split="train",
-    ) -> None:
+    ) -> Dataset:
     
     dataset = load_dataset(
         dataset_name,

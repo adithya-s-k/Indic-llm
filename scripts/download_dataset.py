@@ -15,6 +15,7 @@ wd = Path(__file__).parent.parent.resolve()
 sys.path.append(str(wd))
 
 from indic_llm import download
+from indic_llm import convert_to_corpus
 
 logging.basicConfig(
     level=logging.INFO,
@@ -45,14 +46,37 @@ class DownloadDataset():
             default="train",
             help="Dataset split to use (default: 'train').",
         )
-        
+        parser.add_argument(
+            "--generate-corpus",
+            type=bool, 
+            required=False,
+            default = False,
+            help="Generate text corpus from the dataset"
+        )
+        parser.add_argument(
+            "--text-column",
+            type=str,
+            required=False,
+            default="text",
+            help="the text column of the dataset to concatenate and create the text corpus"
+        )
 
         args = parser.parse_args()
-        download(
-            args.hf_dataset,
-            args.hf_subset,
-            args.dataset_split
-        )
+        # if generate corpus is true
+        if args.generate_corpus:
+            downloaded_dataset = download(
+                args.hf_dataset,
+                args.hf_subset,
+                args.dataset_split
+            )
+            convert_to_corpus(downloaded_dataset)
+        # if generate corpus is false
+        else:
+            downloaded_dataset = download(
+                args.hf_dataset,
+                args.hf_subset,
+                args.dataset_split
+            )
         
 if __name__ == "__main__":
     download_dataset = DownloadDataset()
