@@ -47,17 +47,27 @@ def download_convert_to_txt(
     ) -> None:
     
     try:
+        logger.info("Starting to download/load dataset")
         dataset = load_dataset(dataset_name,dataset_subset,split=dataset_split)
+        logger.info("Dataset loaded/downloaded successfully")
+        logger.info("Converting to pandas dataframe")
         train_df = pd.DataFrame(dataset)
+        logger.info("Conversion complete")
 
-        os.makedirs(output_dir, exist_ok=True)
-        corpus_path = os.path.join(output_dir, output_file_name)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+            corpus_path = os.path.join(output_dir, output_file_name)
+            logger.info(f"Created output directory: {output_dir}")
+        else:
+            logger.info(f"Output directory already exists: {output_dir}")
 
+        logger.info("Creating Text corpus")
         with open(corpus_path, "w") as file:
             for index, value in tqdm(
                 train_df[text_col].items(), total=len(train_df)
             ):
                 file.write(str(value) + "\n")
+        logger.info("CText corpus Created Successfully")
 
     except Exception as e:
         logger.error(f"Error creating the text corpus -> {e}")

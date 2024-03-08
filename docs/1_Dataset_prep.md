@@ -47,16 +47,10 @@ kannada subset
        --text-col "text" \
        --output-file-name "kannada_sentence_corpus_CulturaX.txt"
    ```
-
+   
 4. [oscar-corpus/OSCAR-2201-151k](https://huggingface.co/datasets/oscar-corpus/OSCAR-2201)
-
-
 5. [indic_glue-13k](https://huggingface.co/datasets/indic_glue)
-
-
 6. [kannada_news-6k](https://huggingface.co/datasets/kannada_news)
-
-
 7. [oscar 251k](https://huggingface.co/datasets/oscar/viewer/unshuffled_deduplicated_kn)
 
 ## Translation Datasets
