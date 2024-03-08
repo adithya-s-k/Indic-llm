@@ -81,8 +81,7 @@ class DownloadDataset():
         for arg, value in vars(args).items():
             logger.info(f"{arg}: {value}")
 
-        
-        logger.log(print_indic_llm_text_art())
+        print_indic_llm_text_art()
 
         logger.setLevel(logging.INFO)
         # if generate corpus is true
