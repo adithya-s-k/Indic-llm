@@ -99,12 +99,12 @@ class DownloadDataset():
             assert args.output_file_name.endswith(".txt"), "Output file name should end with '.txt'"
             
             download_convert_to_txt(
-                arg.hf_dataset,
-                arg.hf_subset,
+                args.hf_dataset,
+                args.hf_subset,
                 args.dataset_split,
                 args.text_col,
-                arg.output_file_name,
-                arg.output_dir
+                args.output_file_name,
+                args.output_dir
             )
         # if generate corpus is false
         elif args.generate_corpus == False:
