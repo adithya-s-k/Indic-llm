@@ -33,6 +33,9 @@ class TokenizerCLI(SentencePieceTrainer):
         parser = argparse.ArgumentParser(
             description="Tokenizer Script"
         )
+        
+        # train arguments
+        
         parser.add_argument("--train", action="store_true", help="Train Tokeniser")
         parser.add_argument(
             "--input-file",
@@ -68,9 +71,19 @@ class TokenizerCLI(SentencePieceTrainer):
             help="Type of SentencePiece model.",
         )
         
-        parser.add_argument("--merge", action="store_true", help="Merge Tokeniser")
-        parser.add_argument("--base-tokeniser", type=str, help="Base Tokeniser for Merging")
-        parser.add_argument("--merged-output", type=str, help="Output Path for Merged Tokeniser")
+        # merge arguments
+        
+        parser.add_argument("--merge", action="store_true", help="Merge Tokenizer")
+        parser.add_argument("--base-tokenizer", type=str, help="Base Tokenizer for Merging")
+        parser.add_argument("--trained-tokenizer", type=str, help="Base Tokenizer for Merging")
+        parser.add_argument("--merged-output", type=str, help="Output Path for Merged Tokenizer")
+        
+        # test arguments
+        parser.add_argument("--test", action="store_true", help="Merge Tokenizer")
+        parser.add_argument("--base-tokenizer", type=str, help="Base Tokenizer for Merging")
+        parser.add_argument("--merged-tokenizer", type=str, help="Base Tokenizer for Merging")
+        parser.add_argument("--dataset", type=str, help="Dataset to test the tokenizer on")
+        parser.add_argument("--text-cols", type=str, help="Column to test the tokenizer on")
 
         args = parser.parse_args()
         
@@ -85,10 +98,18 @@ class TokenizerCLI(SentencePieceTrainer):
         logger.setLevel(logging.INFO)
         
         
+        self.output_dir = args.output_dir
+        self.model_prefix = args.model_prefix
+        self.vocab_size = args.vocab_size
+        self.character_coverage = args.character_coverage
+        self.model_type = args.model_type
+
+        os.makedirs(self.output_dir, exist_ok=True)
+        
         if args.train:
-            self.train_tokenizer(args.text_corpus, args.output)
+            self.train_tokenizer(args.text_corpus)
         elif args.merge:
-            self.merge_tokenizer(args.base_tokeniser, args.merged_output)
+            self.merge_tokenizer(args.base_tokenizer,args.trained_tokenizer ,args.merged_output)
         elif args.test:
             self.test_tokeniser(args.text_corpus, args.output)
         else:

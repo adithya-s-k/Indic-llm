@@ -8,8 +8,8 @@ import sentencepiece as spm
 class SentencePieceTrainer:
     def __init__(self):
         self.corpus_dir = "./corpus"
-        self.output_dir = "./models"
-        self.model_prefix = "kannada_sp"
+        self.output_dir = "./tokenizer_models"
+        self.model_prefix = "trained_sp_tokenizer"
         self.vocab_size = 20000
         self.character_coverage = 1.0
         self.model_type = "unigram"
