@@ -33,72 +33,36 @@ class TokenizerCLI(SentencePieceTrainer):
         parser = argparse.ArgumentParser(
             description="Tokenizer Script"
         )
-        
-        # train arguments
-        
-        parser.add_argument("--train", action="store_true", help="Train Tokeniser")
-        parser.add_argument(
-            "--input-file",
-            required=True,
-            help="Path to the input text corpus file.",
-        )
-        parser.add_argument(
-            "--output-dir",
-            default="./models",
-            help="Directory where the trained model and vocabulary will be saved.",
-        )
-        parser.add_argument(
-            "--model-prefix",
-            default="SP_tokenizer",
-            help="Prefix for the model and vocabulary filenames.",
-        )
-        parser.add_argument(
-            "--vocab-size",
-            type=int,
-            default=self.vocab_size,
-            help="Size of the vocabulary.",
-        )
-        parser.add_argument(
-            "--character-coverage",
-            type=float,
-            default=self.character_coverage,
-            help="Character coverage for the model.",
-        )
-        parser.add_argument(
-            "--model-type",
-            default=self.model_type,
-            choices=["bpe", "unigram", "char", "word"],
-            help="Type of SentencePiece model.",
-        )
-        
-        # merge arguments
-        
-        parser.add_argument("--merge", action="store_true", help="Merge Tokenizer")
-        parser.add_argument("--base-tokenizer", type=str, help="Base Tokenizer for Merging")
-        parser.add_argument("--trained-tokenizer", type=str, help="Base Tokenizer for Merging")
 
-        
-        # test arguments
-        parser.add_argument("--test", action="store_true", help="Merge Tokenizer")
-        parser.add_argument("--tokenizer-model", type=str, help="tokenizer to determine the number of indic tokens")
-        parser.add_argument("--text", type=str, help="Pass in the text you want to tokenize")
-        
-        # test arguments
-        parser.add_argument("--test-dataset", action="store_true", help="Merge Tokenizer")
-        parser.add_argument("--base-tokenizer", type=str, help="Base Tokenizer for Merging")
-        parser.add_argument("--merged-tokenizer", type=str, help="Merged Tokenizer for testing")
-        parser.add_argument("--dataset", type=str, help="Dataset to test the tokenizer on")
-        parser.add_argument("--text-cols", type=str, help="Column to test the tokenizer on")
-        
-        # count indic tokens in the tokenizer
-        parser.add_argument("--count-tokens", action="store_true", help="Merge Tokenizer")
-        parser.add_argument("--tokenizer-model", type=str, help="tokenizer to determine the number of indic tokens")
+        # Train arguments
+        parser.add_argument("--train", action="store_true", help="Enable training the tokenizer.")
+        parser.add_argument("--input-file", required=True, help="Path to the input text corpus file (should be a .txt file).")
+        parser.add_argument("--output-dir", default="./models", help="Directory to save the trained model and vocabulary.")
+        parser.add_argument("--model-prefix", default="SP_tokenizer", help="Name to save the SentencePiece model as.")
+        parser.add_argument("--vocab-size", type=int, default=self.vocab_size, help="Total vocabulary size of the tokenizer.")
+        parser.add_argument("--character-coverage", type=float, default=self.character_coverage, help="Character coverage for the model (default: 1.0).")
+        parser.add_argument("--model-type", default=self.model_type, choices=["bpe", "unigram", "char", "word"], help="Type of SentencePiece model.")
+
+        # Merge arguments
+        parser.add_argument("--merge", action="store_true", help="Enable merging two tokenizers.")
+        parser.add_argument("--base-tokenizer", type=str, help="Base tokenizer name or path.")
+        parser.add_argument("--trained-tokenizer", type=str, help="Tokenizer name or path to merge with the base tokenizer.")
+
+        # Test arguments
+        parser.add_argument("--test", action="store_true", help="Enable testing the tokenizer.")
+        parser.add_argument("--tokenizer-model", type=str, help="Name or path of the tokenizer model.")
+        parser.add_argument("--text", type=str, help="Input text to tokenize.")
+
+        # Count Indic tokens arguments
+        parser.add_argument("--count-indic-tokens", action="store_true", help="Count the number of Indic tokens using UTF-8 ranges.")
+        parser.add_argument("--tokenizer-model", type=str, help="Name or path to the tokenizer model.")
 
 
         args = parser.parse_args()
         
         # Initialize logger with appropriate log level
-                # Log parsed arguments
+        
+        # Log parsed arguments
         logger.info("Parsed arguments:")
         for arg, value in vars(args).items():
             logger.info(f"{arg}: {value}")
@@ -120,10 +84,10 @@ class TokenizerCLI(SentencePieceTrainer):
             self.merge_tokenizer(args.base_tokenizer,args.trained_tokenizer ,args.merged_output)
         elif args.test:
             self.test_tokenizer(args.tokenizer_model, args.text)
-        elif args.count_tokens:
+        elif args.count_indic_tokens:
             args.count_language_tokens(args.tokenizer_model)
-        elif args.test_dataset:
-            pass # feature to be added
+        # elif args.test_dataset:
+        #     pass # feature to be added
         else:
             logger.error("Please provide either --train or --merge or --test option.")
 
