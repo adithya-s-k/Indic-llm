@@ -25,8 +25,8 @@ python ./scripts/tokenizer.py \
     --input-file /path/to/input_corpus.txt \
     --output-dir ./models \
     --model-prefix SP_tokenizer \
-    --vocab-size 5000 \
-    --character-coverage 0.95 \
+    --vocab-size 20000 \
+    --character-coverage 1.0 \
     --model-type bpe
 ```
 
