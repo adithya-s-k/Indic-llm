@@ -24,19 +24,7 @@ pip3 install -r requirements.txt
 
 
 ## Quick Start
-
-```bash
-
-```
-
-## Dataset Prep
-
-
-## Finetuning
-
-
-## Evaluation
-
+Please Refer to the [Docs](./docs)
 
 ## Usage Note
 
