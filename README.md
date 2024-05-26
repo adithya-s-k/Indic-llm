@@ -125,3 +125,15 @@ We welcome contributions to enhance and expand this project. If you have suggest
 This project is licensed under the GNU GPL v3.0 license. For details, refer to the [LICENSE.md](LICENSE.md) file.
 
 **IMPORTANT:** The GPL 3.0 License applies solely to the source code and datasets provided in this repository. As Indic-LLM is a derivative of Meta's LLama 2 model, it is subject to the original licensing of LLama 2, which cannot be altered. Therefore, for comprehensive details regarding the licensing of the model, please consult the LLAMA2-LICENSE file.
+
+<!-- ## Citation
+
+If you use ambari model or the kannada-instruct dataset in your research, please cite:
+
+*Insert citation information here* -->
+
+## Acknowledgment
+
+This repository draws inspiration from the following repositories:
+- [Chinese-LLaMA-Alpaca](https://github.com/ymcui/Chinese-LLaMA-Alpaca)
+- [Tamil-LLaMA](https://github.com/abhinand5/tamil-llama)
